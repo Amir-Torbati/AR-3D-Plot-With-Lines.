@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AR 3D Plot with QR Code</title>
+  <!-- Include A-Frame library -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- Include AR.js for A-Frame -->
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    #plot-html { display: none; }
+  </style>
+</head>
+<body>
+  <!-- A-Frame scene with AR.js configuration -->
+  <a-scene embedded arjs="sourceType: webcam;">
+    <!-- Marker definition using the QR code -->
+    <a-marker type="pattern" url="pattern-marker.patt">
+      <!-- Plane entity to display the Plotly plot as a texture -->
+      <a-entity geometry="primitive: plane; height: 4; width: 4"
+                material="shader: html; target: #plot-html"
+                position="0 1 0" rotation="-90 0 0">
+      </a-entity>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <!-- Hidden div containing the Plotly plot as an iframe -->
+  <div id="plot-html">
+    <iframe src="ElectricityDispatchSpainWithLines.html" style="width: 800px; height: 800px; border: none;"></iframe>
+  </div>
+</body>
+</html>
